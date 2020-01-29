@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block layout %}
+    {% block header %}
+        {% include '_navbar.html.twig' %}
+    {% endblock %}
+    <main>
+        {% block body %}
+        {% endblock %}
+    </main>
+{% endblock %}
