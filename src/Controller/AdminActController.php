@@ -44,4 +44,50 @@ class AdminActController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+
+    /**
+     * @Route("/admin/act/{id}/edit", name="admin_act_edit", methods={"GET","POST"})
+     */
+    public function edit(Request $request, Act $act): Response
+    {
+        $form = $this->createForm(ActType::class, $act);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $act->setUpdatedAt(new DateTime());
+            $entityManager->persist($act);
+            $entityManager->flush();
+            $this->addFlash('success', 'Votre numéro a été modifié');
+            return $this->redirectToRoute('admin_act_index');
+        }
+        return $this->render('act/edit.html.twig', [
+            'act' => $act,
+            'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/admin/act/{id}", name="admin_act_show", methods={"GET"})
+     */
+    public function show(Act $act): Response
+    {
+        return $this->render('act/show.html.twig', [
+            'act' => $act,
+        ]);
+    }
+
+    /**
+     * @Route("/admin/act/{id}", name="admin_act_delete", methods={"DELETE"})
+     */
+    public function delete(Request $request, Act $act): Response
+    {
+        if ($this->isCsrfTokenValid('delete'.$act->getId(), $request->request->get('_token'))) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->remove($act);
+            $entityManager->flush();
+            $this->addFlash('danger', 'Votre numéro a été supprimé');
+        }
+
+        return $this->redirectToRoute('admin_act_index');
+    }
 }

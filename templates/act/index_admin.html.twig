@@ -21,7 +21,7 @@
             <tbody>
             {% for act in acts %}
                 <tr>
-                    <td>{{ act.name }}</td>
+                    <td><a href="{{ path('admin_act_show', {'id': act.id}) }}">{{ act.name }}</a></td>
                     <td>{{ act.description }}</td>
                     <td>{{ act.created|format_datetime('short', 'none', locale='fr')}}</td>
                 </tr>
