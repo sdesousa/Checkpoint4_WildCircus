@@ -14,6 +14,11 @@
                 <p>Lieu : {{ nextSpectacle.place }}</p>
                 <p>Date : {{ nextSpectacle.date|format_datetime('short', 'short', locale='fr') }}</p>
                 <p>Places disponibles : {{ nextSpectacle.capacity }}</p>
+                <ul> Tarif :
+                    <li> Enfants : {{ price.kid }}</li>
+                    <li> Adulte : {{ price.adult }}</li>
+                    <li> Sénior : {{ price.senior }}</li>
+                </ul>
                 <a class="btn btn-turquoise" href="#">Réserver</a>
             </div>
             <div class="col-6">
