@@ -18,7 +18,7 @@ class ActFixtures extends Fixture
             $act->setName($faker->word());
             $act->setDescription($faker->paragraph(4));
             $act->setCreated($faker->dateTimeThisDecade);
-            $act->setPicture('circus-act.webp');
+            $act->setUpdatedAt(new DateTime());
             $this->addReference('act_'.$i, $act);
             $manager->persist($act);
         }

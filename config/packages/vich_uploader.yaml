@@ -1,0 +1,8 @@
+vich_uploader:
+    db_driver: orm
+
+    mappings:
+        act_picture:
+            uri_prefix: /uploads/act
+            upload_destination: '%kernel.project_dir%/public/uploads/act'
+            namer: Vich\UploaderBundle\Naming\UniqidNamer

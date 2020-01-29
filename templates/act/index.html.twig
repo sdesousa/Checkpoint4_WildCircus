@@ -1,0 +1,21 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Nos numéros{% endblock %}
+
+{% block body %}
+    <h1>Nos numéros</h1>
+    {% for act in acts %}
+        <section class="row my-4">
+            <div class="col-lg-6 p-5">
+                <img class="imgSectionHome" src="{{ asset('build/' ~ act.picture) }}" alt="{{ act.name }}">
+            </div>
+            <div class="col-lg-6 p-5  d-flex flex-column">
+                <h2 class="text-center primary-color">{{ act.name }}</h2>
+                <div class="m-4 p-4">
+                    <p class="textIndent">{{ act.description }}</p>
+                    <p> Première représentation le {{ act.created|format_date('short', locale='fr') }}</p>
+                </div>
+            </div>
+        </section>
+    {% endfor %}
+{% endblock %}
