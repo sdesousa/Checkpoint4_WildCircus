@@ -3,6 +3,35 @@
 {% block title %}Wild Circus{% endblock %}
 
 {% block body %}
-    <h1>Wild circus</h1>
-    <img src="{{ asset('build/circus-home.webp') }}" alt="Wild circus">
+    <h1 class="mb-4">Wild circus</h1>
+    <img class="imgHome" src="{{ asset('build/circus-home.webp') }}" alt="Wild circus">
+
+    <div class="container-fluid mt-5">
+        <section class="row my-4">
+            <div class="col-6">
+                <h2>Notre prochain spectacle : </h2>
+                <h2>{{ nextSpectacle.name }}</h2>
+                <p>Lieu : {{ nextSpectacle.place }}</p>
+                <p>Date : {{ nextSpectacle.date|format_datetime('short', 'short', locale='fr') }}</p>
+                <p>Places disponibles : {{ nextSpectacle.capacity }}</p>
+                <a class="btn btn-turquoise" href="#">Réserver</a>
+            </div>
+            <div class="col-6">
+                <img class="imgSectionHome" src="{{ asset('build/' ~ nextSpectacle.poster) }}" alt="{{ nextSpectacle.name }}">
+            </div>
+        </section>
+
+        <section class="row my-4">
+            <div class="col-6">
+                <img class="imgSectionHome" src="{{ asset('build/' ~ lastAct.picture) }}" alt="{{ lastAct.name }}">
+            </div>
+            <div class="col-6">
+                <h2>Notre nouveau numéro : </h2>
+                <h2>{{ lastAct.name }}</h2>
+                <p>{{ lastAct.description }}</p>
+                <a class="btn btn-turquoise" href="#">Plus d'infos</a>
+            </div>
+        </section>
+    </div>
+
 {% endblock %}

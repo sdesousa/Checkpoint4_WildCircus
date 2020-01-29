@@ -19,32 +19,14 @@ class SpectacleRepository extends ServiceEntityRepository
         parent::__construct($registry, Spectacle::class);
     }
 
-    // /**
-    //  * @return Spectacle[] Returns an array of Spectacle objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    public function findNextSpectacle()
     {
-        return $this->createQueryBuilder('s')
-            ->andWhere('s.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('s.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
+        $qb = $this->createQueryBuilder('s');
+        $query = $qb
+            ->where($qb->expr()->gt('s.date', 'CURRENT_TIMESTAMP()'))
+            ->orderBy('s.date', 'ASC')
+            ->setMaxResults(1)
+            ->getQuery();
+        return $query->getSingleResult();
     }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?Spectacle
-    {
-        return $this->createQueryBuilder('s')
-            ->andWhere('s.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 }

@@ -17,7 +17,7 @@ class ActFixtures extends Fixture
             $act = new Act();
             $act->setName($faker->word());
             $act->setDescription($faker->paragraph(4));
-            $act->setCreated($faker->dateTimeInInterval('-5 years', 'now'));
+            $act->setCreated($faker->dateTimeThisDecade);
             $act->setPicture('circus-act.webp');
             $manager->persist($act);
         }

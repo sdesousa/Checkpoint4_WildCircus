@@ -1,9 +1,41 @@
-@import "~bootstrap/scss/bootstrap";
-
 $primary-color: #1abc9c;
 $secondary-color: #0a2342;
 $third-color: #f0f0f0;
+$fourth-color: #FFEE5E;
 $font-body: 'Lato', sans-serif;
 $font-title: 'Quicksand', sans-serif;
-$font-size-title: 2rem;
+$font-size-title: 3rem;
 $font-size-body: 1.2rem;
+
+
+@import "navbar";
+@import "home";
+@import "~bootstrap/scss/bootstrap";
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  color: $secondary-color;
+  font-family: $font-body;
+  font-size: $font-size-body;
+}
+
+a {
+  text-decoration: none;
+  color: $primary-color;
+}
+
+h1 {
+  font-size: $font-size-title;
+  font-family: $font-title;
+  font-weight: bold;
+  color: $primary-color;
+  text-align: center;
+}
+
+.btn-turquoise {
+  background-color: $primary-color;
+  color: $secondary-color;
+}
