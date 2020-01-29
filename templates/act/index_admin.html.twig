@@ -1,0 +1,36 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Admin numéros{% endblock %}
+
+{% block body %}
+    <div class="container-fluid">
+        <h1 class="text-center m-5">Les numéros</h1>
+
+        <a href="{{ path('admin_act_new') }}" class="btn btn-turquoise">
+            Créer un numéro
+        </a>
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Description</th>
+                <th>Création</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for act in acts %}
+                <tr>
+                    <td>{{ act.name }}</td>
+                    <td>{{ act.description }}</td>
+                    <td>{{ act.created|format_datetime('short', 'none', locale='fr')}}</td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="5">Aucun article trouvé</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

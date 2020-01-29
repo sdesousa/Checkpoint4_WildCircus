@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Act;
 use App\Form\ActType;
+use App\Repository\ActRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,10 +16,10 @@ class AdminActController extends AbstractController
     /**
      * @Route("/admin/act", name="admin_act_index")
      */
-    public function index()
+    public function index(ActRepository $actRepository)
     {
-        return $this->render('admin_act/index.html.twig', [
-            'controller_name' => 'AdminActController',
+        return $this->render('act/index_admin.html.twig', [
+            'acts' => $actRepository->findBy([], ['created' => 'DESC']),
         ]);
     }
 
