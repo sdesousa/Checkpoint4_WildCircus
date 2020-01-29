@@ -35,6 +35,10 @@ h1 {
   text-align: center;
 }
 
+.primary-color {
+  color: $primary-color;
+}
+
 .btn-turquoise {
   background-color: $primary-color;
   color: $secondary-color;

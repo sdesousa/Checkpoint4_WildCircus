@@ -8,33 +8,45 @@
 
     <div class="container-fluid mt-5">
         <section class="row my-4">
-            <div class="col-6">
-                <h2>Notre prochain spectacle : </h2>
-                <h2>{{ nextSpectacle.name }}</h2>
-                <p>Lieu : {{ nextSpectacle.place }}</p>
-                <p>Date : {{ nextSpectacle.date|format_datetime('short', 'short', locale='fr') }}</p>
-                <p>Places disponibles : {{ nextSpectacle.capacity }}</p>
-                <ul> Tarif :
-                    <li> Enfants : {{ price.kid }}</li>
-                    <li> Adulte : {{ price.adult }}</li>
-                    <li> Sénior : {{ price.senior }}</li>
-                </ul>
-                <a class="btn btn-turquoise" href="#">Réserver</a>
+            <div class="col-lg-6 p-5 d-flex flex-column">
+                <h2 class="text-center primary-color">Notre prochain spectacle : </h2>
+                <h2 class="text-center primary-color">{{ nextSpectacle.name }}</h2>
+                <div class="m-4 p-4">
+                    <p>Lieu : {{ nextSpectacle.place }}</p>
+                    <p>Date :
+                        {{ nextSpectacle.date|format_datetime('long', 'none', locale='fr') }} à
+                        {{ nextSpectacle.date|format_datetime('none', 'short', locale='fr') }}
+                    </p>
+                    <p>Places disponibles : {{ nextSpectacle.capacity }}</p>
+                    <ul> Tarif :
+                        <li class="ml-5"> Enfants : {{ price.kid }}</li>
+                        <li class="ml-5"> Adulte : {{ price.adult }}</li>
+                        <li class="ml-5"> Sénior : {{ price.senior }}</li>
+                    </ul>
+                </div>
+                <a class="btn btn-turquoise align-self-center btnReservation" href="#">Réserver</a>
             </div>
-            <div class="col-6">
+            <div class="col-lg-6 p-5">
                 <img class="imgSectionHome" src="{{ asset('build/' ~ nextSpectacle.poster) }}" alt="{{ nextSpectacle.name }}">
             </div>
         </section>
 
         <section class="row my-4">
-            <div class="col-6">
+            <div class="col-lg-6 p-5">
                 <img class="imgSectionHome" src="{{ asset('build/' ~ lastAct.picture) }}" alt="{{ lastAct.name }}">
             </div>
-            <div class="col-6">
-                <h2>Notre nouveau numéro : </h2>
-                <h2>{{ lastAct.name }}</h2>
-                <p>{{ lastAct.description }}</p>
-                <a class="btn btn-turquoise" href="#">Plus d'infos</a>
+            <div class="col-lg-6 p-5  d-flex flex-column">
+                <h2 class="text-center primary-color">Notre nouveau numéro : </h2>
+                <h2 class="text-center primary-color">{{ lastAct.name }}</h2>
+                <div class="m-4 p-4">
+                    <p class="textIndent">{{ lastAct.description }}</p>
+                    <p>Prochainement visible lors du show : </p>
+                    <div class="m-3 p-3 nextShow">
+                        <p>{{ nextSpectacleWithAct.name }}</p>
+                        <p>Le {{ nextSpectacleWithAct.date|format_datetime('short', 'none', locale='fr') }}</p>
+                    </div>
+                </div>
+                <a class="btn btn-turquoise align-self-center btnReservation" href="#">Plus d'infos</a>
             </div>
         </section>
     </div>

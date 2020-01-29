@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -40,6 +42,16 @@ class Spectacle
      * @ORM\Column(type="string", length=255)
      */
     private $poster;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Act", mappedBy="spectacles")
+     */
+    private $acts;
+
+    public function __construct()
+    {
+        $this->acts = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -102,6 +114,34 @@ class Spectacle
     public function setPoster(string $poster): self
     {
         $this->poster = $poster;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Act[]
+     */
+    public function getActs(): Collection
+    {
+        return $this->acts;
+    }
+
+    public function addAct(Act $act): self
+    {
+        if (!$this->acts->contains($act)) {
+            $this->acts[] = $act;
+            $act->addSpectacle($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAct(Act $act): self
+    {
+        if ($this->acts->contains($act)) {
+            $this->acts->removeElement($act);
+            $act->removeSpectacle($this);
+        }
 
         return $this;
     }

@@ -38,6 +38,11 @@ class Act
      */
     private $picture;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Spectacle", inversedBy="acts")
+     */
+    private $spectacles;
+
     public function __construct()
     {
         $this->spectacles = new ArrayCollection();
@@ -92,6 +97,32 @@ class Act
     public function setPicture(string $picture): self
     {
         $this->picture = $picture;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Spectacle[]
+     */
+    public function getSpectacles(): Collection
+    {
+        return $this->spectacles;
+    }
+
+    public function addSpectacle(Spectacle $spectacle): self
+    {
+        if (!$this->spectacles->contains($spectacle)) {
+            $this->spectacles[] = $spectacle;
+        }
+
+        return $this;
+    }
+
+    public function removeSpectacle(Spectacle $spectacle): self
+    {
+        if ($this->spectacles->contains($spectacle)) {
+            $this->spectacles->removeElement($spectacle);
+        }
 
         return $this;
     }

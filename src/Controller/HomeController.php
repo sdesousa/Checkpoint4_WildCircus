@@ -18,11 +18,13 @@ class HomeController extends AbstractController
     {
         $nextSpectacle = $spectacleRepository->findNextSpectacle();
         $lastAct = $actRepository->findOneBy([], ['created' => 'DESC']);
+        $nextSpectacleWithAct = $spectacleRepository->findNextSpectacleWithAct($lastAct);
         $price = $priceRepository->findOneBy([]);
 
         return $this->render('home/index.html.twig', [
             'nextSpectacle' => $nextSpectacle,
             'lastAct' => $lastAct,
+            'nextSpectacleWithAct' => $nextSpectacleWithAct,
             'price' => $price,
         ]);
     }

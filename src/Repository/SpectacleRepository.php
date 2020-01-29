@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\Act;
 use App\Entity\Spectacle;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
@@ -24,6 +25,19 @@ class SpectacleRepository extends ServiceEntityRepository
         $qb = $this->createQueryBuilder('s');
         $query = $qb
             ->where($qb->expr()->gt('s.date', 'CURRENT_TIMESTAMP()'))
+            ->orderBy('s.date', 'ASC')
+            ->setMaxResults(1)
+            ->getQuery();
+        return $query->getSingleResult();
+    }
+
+    public function findNextSpectacleWithAct(Act $act)
+    {
+        $qb = $this->createQueryBuilder('s');
+        $query = $qb
+            ->where($qb->expr()->gt('s.date', 'CURRENT_TIMESTAMP()'))
+            ->andWhere(':act MEMBER OF s.acts')
+            ->setParameter('act', $act)
             ->orderBy('s.date', 'ASC')
             ->setMaxResults(1)
             ->getQuery();
