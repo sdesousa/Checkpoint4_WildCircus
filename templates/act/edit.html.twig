@@ -4,10 +4,9 @@
 
 {% block body %}
     <h1>Modifier numéro</h1>
-
     {{ include('act/_form.html.twig', {'button_label': 'Modifier'}) }}
-
-    <a href="{{ path('admin_act_index') }}">retourner à la liste des numéros</a>
-
-    {{ include('act/_delete_form.html.twig') }}
+    <div class="d-flex justify-content-around">
+        <a class="btn btn-turquoise" href="{{ path('admin_act_index') }}">retourner à la liste des numéros</a>
+        {{ include('act/_delete_form.html.twig') }}
+    </div>
 {% endblock %}

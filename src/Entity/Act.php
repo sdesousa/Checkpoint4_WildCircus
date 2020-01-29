@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\Validator\Constraints as Assert;
 use \DateTime;
 
 /**
@@ -24,16 +25,22 @@ class Act
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Champ obligatoire")
+     * @Assert\Length(
+     *      max = 255,
+     *      maxMessage = "Entrée trop longue, elle doit être au plus {{ limit }} caractères")
      */
     private $name;
 
     /**
      * @ORM\Column(type="text")
+     * @Assert\NotBlank(message="Champ obligatoire")
      */
     private $description;
 
     /**
      * @ORM\Column(type="date")
+     * @Assert\NotBlank(message="Champ obligatoire")
      */
     private $created;
 
@@ -45,6 +52,12 @@ class Act
     /**
      * @Vich\UploadableField(mapping="act_picture", fileNameProperty="picture")
      * @var File|null
+     * @Assert\File(
+     *     maxSize = "200k",
+     *     maxSizeMessage="La taille des images est limité à {{ limit }} {{ suffix }}",
+     *     mimeTypes = {"image/jpeg", "image/png", "image/webp", "image/gif"},
+     *     mimeTypesMessage = "Ce n'est pas un format d'image valide"
+     * )
      */
     private $pictureFile;
 

@@ -5,9 +5,13 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use \DateTime;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\SpectacleRepository")
+ * @Vich\Uploadable
  */
 class Spectacle
 {
@@ -39,9 +43,21 @@ class Spectacle
     private $capacity;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $poster;
+
+    /**
+     * @Vich\UploadableField(mapping="spectacle_picture", fileNameProperty="poster")
+     * @var File|null
+     */
+    private $posterFile;
+
+    /**
+     * @ORM\Column(type="datetime")
+     * @var \DateTime
+     */
+    private $updatedAt;
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Act", mappedBy="spectacles")
@@ -111,11 +127,36 @@ class Spectacle
         return $this->poster;
     }
 
-    public function setPoster(string $poster): self
+    public function setPoster(?string $poster): self
     {
         $this->poster = $poster;
 
         return $this;
+    }
+
+    /**
+     * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile $posterFile
+     */
+    public function setPosterFile(?File $posterFile = null): void
+    {
+        $this->posterFile = $posterFile;
+
+        if (null !== $posterFile) {
+            $this->updatedAt = new DateTime();
+        }
+    }
+
+    public function getPosterFile(): ?File
+    {
+        return $this->posterFile;
+    }
+
+    /**
+     * @param \DateTime $updatedAt
+     */
+    public function setUpdatedAt(DateTime $updatedAt): void
+    {
+        $this->updatedAt = $updatedAt;
     }
 
     /**

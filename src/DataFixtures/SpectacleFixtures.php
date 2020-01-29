@@ -7,6 +7,7 @@ use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Faker;
 use App\Entity\Spectacle;
+use \DateTime;
 
 class SpectacleFixtures extends Fixture implements DependentFixtureInterface
 {
@@ -19,7 +20,7 @@ class SpectacleFixtures extends Fixture implements DependentFixtureInterface
             $spectacle->setPlace($faker->city);
             $spectacle->setCapacity(80);
             $spectacle->setDate($faker->dateTimeInInterval('now', '+3 month'));
-            $spectacle->setPoster('circus-show.webp');
+            $spectacle->setUpdatedAt(new DateTime());
             $acts = array_rand(range(0,7), rand(2, 5));
             foreach ($acts as $act) {
                 $spectacle->addAct($this->getReference('act_' . $act));

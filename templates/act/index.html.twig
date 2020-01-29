@@ -7,7 +7,14 @@
     {% for act in acts %}
         <section class="row my-4">
             <div class="col-lg-6 p-5">
-                <img class="imgSectionHome" src="{{ asset('build/' ~ act.picture) }}" alt="{{ act.name }}">
+                <img class="imgSectionHome"
+                     src="
+                        {% if act.picture is null %}
+                        {{ asset('build/circus-act.webp') }}
+                        {% else %}
+                        {{ vich_uploader_asset(act, 'pictureFile') }}
+                        {% endif %}"
+                     alt="{{ act.name }}">
             </div>
             <div class="col-lg-6 p-5  d-flex flex-column">
                 <h2 class="text-center primary-color">{{ act.name }}</h2>

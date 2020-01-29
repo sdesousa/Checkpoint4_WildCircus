@@ -27,13 +27,27 @@
                 <a class="btn btn-turquoise align-self-center btnReservation" href="#">Réserver</a>
             </div>
             <div class="col-lg-6 p-5">
-                <img class="imgSectionHome" src="{{ asset('build/' ~ nextSpectacle.poster) }}" alt="{{ nextSpectacle.name }}">
+                <img class="imgSectionHome"
+                     src="
+                        {% if nextSpectacle.poster is null %}
+                        {{ asset('build/circus-show.webp') }}
+                        {% else %}
+                        {{ vich_uploader_asset(nextSpectacle, 'posterFile') }}
+                        {% endif %}"
+                     alt="{{ nextSpectacle.name }}">
             </div>
         </section>
 
         <section class="row my-4">
             <div class="col-lg-6 p-5">
-                <img class="imgSectionHome" src="{{ asset('build/' ~ lastAct.picture) }}" alt="{{ lastAct.name }}">
+                <img class="imgSectionHome"
+                     src="
+                        {% if lastAct.picture is null %}
+                        {{ asset('build/circus-act.webp') }}
+                        {% else %}
+                        {{ vich_uploader_asset(lastAct, 'pictureFile') }}
+                        {% endif %}"
+                     alt="{{ lastAct.name }}">
             </div>
             <div class="col-lg-6 p-5  d-flex flex-column">
                 <h2 class="text-center primary-color">Notre nouveau numéro : </h2>
