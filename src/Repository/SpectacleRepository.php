@@ -31,6 +31,26 @@ class SpectacleRepository extends ServiceEntityRepository
         return $query->getSingleResult();
     }
 
+    public function findNextSpectacles(): array
+    {
+        $qb = $this->createQueryBuilder('s');
+        $query = $qb
+            ->where($qb->expr()->gt('s.date', 'CURRENT_TIMESTAMP()'))
+            ->orderBy('s.date', 'DESC')
+            ->getQuery();
+        return $query->getResult();
+    }
+
+    public function findPreviousSpectacles()
+    {
+        $qb = $this->createQueryBuilder('s');
+        $query = $qb
+            ->where($qb->expr()->lt('s.date', 'CURRENT_TIMESTAMP()'))
+            ->orderBy('s.date', 'DESC')
+            ->getQuery();
+        return $query->getResult();
+    }
+
     public function findNextSpectacleWithAct(Act $act)
     {
         $qb = $this->createQueryBuilder('s');

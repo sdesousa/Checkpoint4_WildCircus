@@ -3,11 +3,11 @@
 {% block title %}Nos numéros{% endblock %}
 
 {% block body %}
-    <h1>Nos numéros</h1>
+    <h1 class="mb-5">Nos numéros</h1>
     {% for act in acts %}
-        <section class="row my-4">
-            <div class="col-lg-6 p-5">
-                <img class="imgSectionHome"
+        <section class="row my-4 w-100">
+            <div class="col-lg-5 p-3 {% if loop.index is even %} order-lg-1 {% endif %}">
+                <img class="imgAct"
                      src="
                         {% if act.picture is null %}
                         {{ asset('build/circus-act.webp') }}
@@ -16,11 +16,11 @@
                         {% endif %}"
                      alt="{{ act.name }}">
             </div>
-            <div class="col-lg-6 p-5  d-flex flex-column">
-                <h2 class="text-center primary-color">{{ act.name }}</h2>
-                <div class="m-4 p-4">
+            <div class="col-lg-7 p-3 d-flex flex-column {% if loop.index is even %} order-lg-0 {% endif %}">
+                <h2 class="text-center">{{ act.name }}</h2>
+                <div class="m-2 p-2">
                     <p class="textIndent">{{ act.description }}</p>
-                    <p> Première représentation le {{ act.created|format_date('short', locale='fr') }}</p>
+                    <p><em>Première représentation le {{ act.created|format_date('short', locale='fr') }}</em></p>
                 </div>
             </div>
         </section>

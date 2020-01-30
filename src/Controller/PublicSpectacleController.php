@@ -21,10 +21,15 @@ class PublicSpectacleController extends AbstractController
     /**
      * @Route("/", name="spectacle_index", methods={"GET"})
      */
-    public function index(SpectacleRepository $spectacleRepository): Response
+    public function index(SpectacleRepository $spectacleRepository, PriceRepository $priceRepository): Response
     {
+        $price = $priceRepository->findOneBy([]);
+        $nextSpectacles = $spectacleRepository->findNextSpectacles();
+        $previousSpectacles = $spectacleRepository->findPreviousSpectacles();
         return $this->render('spectacle/index.html.twig', [
-            'spectacles' => $spectacleRepository->findBy([], ['date' => 'DESC']),
+            'nextSpectacles' => $nextSpectacles,
+            'previousSpectacles' => $previousSpectacles,
+            'price' => $price,
         ]);
     }
 
