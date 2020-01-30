@@ -1,0 +1,34 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}{{ act.name }}{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1 class="text-center m-5">{{ act.name }}</h1>
+        <table class="table w-100">
+            <tbody>
+            <tr>
+                <th>Nom</th>
+                <td>{{ act.name }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ act.description }}</td>
+            </tr>
+            <tr>
+                <th>Photo</th>
+                <td><img src="{{ vich_uploader_asset(act, 'pictureFile') }}" alt="{{ act.name }}"></td>
+            </tr>
+            <tr>
+                <th>Création</th>
+                <td>{{ act.created|format_datetime('short', 'none', locale='fr') }}</td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="d-flex justify-content-around">
+            <a class="btn btn-turquoise" href="{{ path('admin_act_index') }}">Retour</a>
+            <a class="btn btn-turquoise" href="{{ path('admin_act_edit', {'id': act.id}) }}">Modifier</a>
+            {{ include('act/_delete_form.html.twig') }}
+        </div>
+    </div>
+{% endblock %}

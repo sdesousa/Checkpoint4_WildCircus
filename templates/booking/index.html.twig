@@ -1,0 +1,33 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Les réservations{% endblock %}
+
+{% block body %}
+    <div class="container-fluid">
+        <h1 class="text-center m-5">Les réservations</h1>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Personne</th>
+                <th>Spectacle</th>
+                <th>Tickets</th>
+                <th>Prix total</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for booking in bookings %}
+                <tr>
+                    <td><a href="{{ path('admin_booking_show', {'id': booking.id}) }}">{{ booking.user }}</a></td>
+                    <td><a href="{{ path('admin_spectacle_show', {'id': booking.spectacle.id}) }}">{{ booking.spectacle.name }}</a></td>
+                    <td>{{ booking.numberTicket }}</td>
+                    <td>{{ booking.totalPrice }}</td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="5">Aucun article trouvé</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

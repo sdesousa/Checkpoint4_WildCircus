@@ -1,0 +1,17 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}S'inscrire{% endblock %}
+
+{% block body %}
+    <h1>S'inscrire</h1>
+
+    <div class="d-flex justify-content-center">
+        {% form_theme registrationForm 'bootstrap_4_horizontal_layout.html.twig' %}
+        {{ form_start(registrationForm) }}
+        {{ form_row(registrationForm.email) }}
+        {{ form_row(registrationForm.plainPassword) }}
+
+        <button class="btn btn-turquoise">S'inscrire</button>
+        {{ form_end(registrationForm) }}
+    </div>
+{% endblock %}

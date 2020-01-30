@@ -1,0 +1,62 @@
+$primary-color: #1abc9c;
+$secondary-color: #0a2342;
+$third-color: #f0f0f0;
+$white: #ffffff;
+$font-body: 'Lato', sans-serif;
+$font-title: 'Quicksand', sans-serif;
+$font-size-title: 3rem;
+$font-size-body: 1.2rem;
+
+@import "navbar";
+@import "home";
+@import "~bootstrap/scss/bootstrap";
+@import '~@fortawesome/fontawesome-free/scss/fontawesome';
+@import '~@fortawesome/fontawesome-free/scss/regular';
+@import '~@fortawesome/fontawesome-free/scss/solid';
+@import '~@fortawesome/fontawesome-free/scss/brands';
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  color: $secondary-color;
+  font-family: $font-body;
+  font-size: $font-size-body;
+}
+
+
+h1 {
+  font-size: $font-size-title;
+  font-family: $font-title;
+  font-weight: bold;
+  color: $primary-color;
+  text-align: center;
+}
+
+h2 {
+  font-family: $font-title;
+  color: $primary-color;
+  font-weight: bold;
+  font-size: 2rem;
+}
+
+.primary-color {
+  color: $primary-color;
+}
+
+.btn-turquoise {
+  background-color: $primary-color;
+  color: $secondary-color;
+
+  &:hover {
+    color: $third-color;
+    box-shadow: 0 0 2px 2px $secondary-color;
+  }
+}
+
+
+main {
+  background-color: $third-color;
+  //margin-top: 92px;
+}
