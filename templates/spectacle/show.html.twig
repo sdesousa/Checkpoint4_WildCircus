@@ -3,38 +3,11 @@
 {% block title %}{{ spectacle.name }}{% endblock %}
 
 {% block body %}
-    <h1 class="mb-4">{{ spectacle.name }}</h1>
+    <h1 class="mb-5">{{ spectacle.name }}</h1>
     <div class="container-fluid mt-5">
         <section class="row my-4">
-            <div class="col-lg-6 p-5 d-flex flex-column">
-                <div class="m-4 p-4">
-                    <p>Lieu : {{ spectacle.place }}</p>
-                    <p>Date :
-                        {{ spectacle.date|format_datetime('long', 'none', locale='fr') }} à
-                        {{ spectacle.date|format_datetime('none', 'short', locale='fr') }}
-                    </p>
-
-                    <ul> Les numéros proposés
-                        {% for act in spectacle.acts %}
-                            <li class="ml-5">{{ act.name }}</li>
-                        {% endfor %}
-                    </ul>
-
-                    <p>Places maximum : {{ spectacle.capacity }}</p>
-                    <p>Places disponibles : {{ availableSeat }}</p>
-                    <ul> Tarif :
-                        <li class="ml-5"> Enfants : {{ price.kid }}</li>
-                        <li class="ml-5"> Adulte : {{ price.adult }}</li>
-                        <li class="ml-5"> Sénior : {{ price.senior }}</li>
-                    </ul>
-                </div>
-
-                {# TODO form booking                #}
-                {{ include('booking/_form.html.twig') }}
-
-            </div>
-            <div class="col-lg-6 p-5">
-                <img class="imgSectionHome"
+            <div class="col-lg-5 p-3">
+                <img class="imgAct"
                      src="
                         {% if spectacle.poster is null %}
                         {{ asset('build/circus-show.webp') }}
@@ -43,6 +16,38 @@
                         {% endif %}"
                      alt="{{ spectacle.name }}">
             </div>
+            <div class="col-lg-7 p-3 d-flex flex-column">
+                <h2 class="text-center">{{ spectacle.name }}</h2>
+                <div class="m-2 p-2 row">
+                    <div class="divTarif col-lg-8 py-3 mb-4 mb-lg-0">
+                        <p><i class="fas fa-map-marker-alt primary-color mr-3"></i>{{ spectacle.place }}</p>
+                        <p><i class="far fa-calendar-alt primary-color mr-3"></i>
+                            {{ spectacle.date|format_datetime('long', 'none', locale='fr') }}
+                        </p>
+                        <p><i class="far fa-clock primary-color mr-3"></i>
+                            {{ spectacle.date|format_datetime('none', 'short', locale='fr') }}
+                        </p>
+                        <p><i class="fas fa-ticket-alt primary-color mr-3"></i>
+                            Encore {{ availableSeat }} places disponible
+                        </p>
+                    </div>
+                    <div class="col-lg-3 offset-lg-1 divTarif py-3 d-flex flex-column">
+                        <i class="fas fa-euro-sign primary-color align-self-center mb-4"></i>
+                        <ul class="tarif">
+                            <li> Enfants : {{ price.kid }}</li>
+                            <li> Adulte : {{ price.adult }}</li>
+                            <li> Sénior : {{ price.senior }}</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </section>
+        {{ include('booking/_form.html.twig') }}
+
     </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('price') }}
 {% endblock %}

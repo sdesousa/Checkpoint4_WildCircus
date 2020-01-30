@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Booking;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -17,17 +18,29 @@ class BookingType extends AbstractType
             ->add('user', TextType::class, [
                 'label' => 'Nom',
             ])
-            ->add('placesKid', NumberType::class,[
+            ->add('placesKid', IntegerType::class,[
                 'label' => 'Places enfants',
                 'mapped' => false,
+                'attr' => [
+                    'min' => 0,
+                    'max' => 10,
+                ],
             ])
-            ->add('placesAdult', NumberType::class,[
+            ->add('placesAdult', IntegerType::class,[
                 'label' => 'Places adultes',
                 'mapped' => false,
+                'attr' => [
+                    'min' => 0,
+                    'max' => 10,
+                ],
             ])
-            ->add('placesSenior', NumberType::class,[
+            ->add('placesSenior', IntegerType::class,[
                 'label' => 'Places seniors',
                 'mapped' => false,
+                'attr' => [
+                    'min' => 0,
+                    'max' => 10,
+                ],
             ])
         ;
     }
