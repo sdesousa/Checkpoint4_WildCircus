@@ -3,5 +3,45 @@
 {% block title %}{{ spectacle.name }}{% endblock %}
 
 {% block body %}
-    <h1>{{ spectacle.name }}</h1>
+    <h1 class="mb-4">{{ spectacle.name }}</h1>
+    <div class="container-fluid mt-5">
+        <section class="row my-4">
+            <div class="col-lg-6 p-5 d-flex flex-column">
+                <div class="m-4 p-4">
+                    <p>Lieu : {{ spectacle.place }}</p>
+                    <p>Date :
+                        {{ spectacle.date|format_datetime('long', 'none', locale='fr') }} à
+                        {{ spectacle.date|format_datetime('none', 'short', locale='fr') }}
+                    </p>
+
+                    <ul> Les numéros proposés
+                        {% for act in spectacle.acts %}
+                            <li class="ml-5">{{ act.name }}</li>
+                        {% endfor %}
+                    </ul>
+
+                    <p>Places maximum : {{ spectacle.capacity }}</p>
+                    <p>Places disponibles : {{ spectacle.capacity }}</p>
+                    <ul> Tarif :
+                        <li class="ml-5"> Enfants : {{ price.kid }}</li>
+                        <li class="ml-5"> Adulte : {{ price.adult }}</li>
+                        <li class="ml-5"> Sénior : {{ price.senior }}</li>
+                    </ul>
+                </div>
+
+                {# TODO form booking                #}
+
+            </div>
+            <div class="col-lg-6 p-5">
+                <img class="imgSectionHome"
+                     src="
+                        {% if spectacle.poster is null %}
+                        {{ asset('build/circus-show.webp') }}
+                        {% else %}
+                        {{ vich_uploader_asset(spectacle, 'posterFile') }}
+                        {% endif %}"
+                     alt="{{ spectacle.name }}">
+            </div>
+        </section>
+    </div>
 {% endblock %}

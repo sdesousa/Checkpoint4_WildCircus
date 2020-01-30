@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Spectacle;
 use App\Repository\SpectacleRepository;
+use App\Repository\PriceRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -27,10 +28,11 @@ class SpectacleController extends AbstractController
     /**
      * @Route("/{id}", name="spectacle_show", methods={"GET"})
      */
-    public function show(Spectacle $spectacle): Response
+    public function show(Spectacle $spectacle, PriceRepository $priceRepository): Response
     {
         return $this->render('spectacle/show.html.twig', [
             'spectacle' => $spectacle,
+            'price' => $priceRepository->findOneBy([]),
         ]);
     }
 }
