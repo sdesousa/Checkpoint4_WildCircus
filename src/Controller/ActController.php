@@ -2,8 +2,6 @@
 
 namespace App\Controller;
 
-use App\Entity\Act;
-use App\Form\ActType;
 use App\Repository\ActRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;

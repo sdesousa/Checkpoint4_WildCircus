@@ -1,45 +1,33 @@
-{% extends 'base.html.twig' %}
+{% extends 'layout.html.twig' %}
 
-{% block title %}Spectacle index{% endblock %}
+{% block title %}Nos Spectacle{% endblock %}
 
 {% block body %}
-    <h1>Spectacle index</h1>
-
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Place</th>
-                <th>Date</th>
-                <th>Capacity</th>
-                <th>Poster</th>
-                <th>UpdatedAt</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for spectacle in spectacles %}
-            <tr>
-                <td>{{ spectacle.id }}</td>
-                <td>{{ spectacle.name }}</td>
-                <td>{{ spectacle.place }}</td>
-                <td>{{ spectacle.date ? spectacle.date|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ spectacle.capacity }}</td>
-                <td>{{ spectacle.poster }}</td>
-                <td>{{ spectacle.updatedAt ? spectacle.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>
-                    <a href="{{ path('spectacle_show', {'id': spectacle.id}) }}">show</a>
-                    <a href="{{ path('spectacle_edit', {'id': spectacle.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="8">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <a href="{{ path('spectacle_new') }}">Create new</a>
+    <h1>Nos spectacles</h1>
+    {% for spectacle in spectacles %}
+        <section class="row my-4">
+            <div class="col-lg-6 p-5">
+                <img class="imgSectionHome"
+                     src="
+                        {% if spectacle.poster is null %}
+                        {{ asset('build/circus-show.webp') }}
+                        {% else %}
+                        {{ vich_uploader_asset(spectacle, 'posterFile') }}
+                        {% endif %}"
+                     alt="{{ spectacle.name }}">
+            </div>
+            <div class="col-lg-6 p-5  d-flex flex-column">
+                <h2 class="text-center primary-color">{{ spectacle.name }}</h2>
+                <div class="m-4 p-4">
+                    <p>Lieu : {{ spectacle.place }}</p>
+                    <p>Date :
+                        {{ spectacle.date|format_datetime('long', 'none', locale='fr') }} à
+                        {{ spectacle.date|format_datetime('none', 'short', locale='fr') }}
+                    </p>
+                    <p>Places disponibles : {{ spectacle.capacity }}</p>
+                </div>
+                <a class="btn btn-turquoise align-self-center btnReservation" href="{{ path('spectacle_show', {'id': spectacle.id}) }}">Réserver</a>
+            </div>
+        </section>
+    {% endfor %}
 {% endblock %}
