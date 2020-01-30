@@ -1,0 +1,42 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}{{ spectacle.name }}{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1 class="text-center m-5">{{ spectacle.name }}</h1>
+        <table class="table w-100">
+            <tbody>
+            <tr>
+                <th>Nom</th>
+                <td>{{ spectacle.name }}</td>
+            </tr>
+            <tr>
+                <th>Lieu</th>
+                <td>{{ spectacle.place }}</td>
+            </tr>
+            <tr>
+                <th>Date</th>
+                <td>{{ spectacle.date|format_datetime('short', 'short', locale='fr') }}</td>
+            </tr>
+            <tr>
+                <th>Capacité</th>
+                <td>{{ spectacle.capacity }}</td>
+            </tr>
+            <tr>
+                <th>Photo</th>
+                <td><img src="{{ vich_uploader_asset(spectacle, 'posterFile') }}" alt="{{ spectacle.name }}"></td>
+            </tr>
+            <tr>
+                <th>Numéros</th>
+                <td>{{ spectacle.actsToString }}</td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="d-flex justify-content-around">
+            <a class="btn btn-turquoise" href="{{ path('admin_spectacle_index') }}">Retour</a>
+            <a class="btn btn-turquoise" href="{{ path('admin_spectacle_edit', {'id': spectacle.id}) }}">Modifier</a>
+            {{ include('spectacle/_delete_form.html.twig') }}
+        </div>
+    </div>
+{% endblock %}

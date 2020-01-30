@@ -41,6 +41,8 @@ class SpectacleType extends AbstractType
                 'class' => Act::class,
                 'label' => 'Numéros',
                 'multiple' => true,
+                'expanded' => true,
+                'by_reference' => false,
                 'choice_label' => 'name',
                 'query_builder' => function (ActRepository $actRepository) {
                     return $actRepository->createQueryBuilder('a')

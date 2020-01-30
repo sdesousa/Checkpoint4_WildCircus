@@ -186,4 +186,13 @@ class Spectacle
 
         return $this;
     }
+
+    public function getActsToString(): string
+    {
+        $actNames = [];
+        foreach ($this->getActs() as $act) {
+            $actNames[] = $act->getName();
+        }
+        return implode(', ', $actNames);
+    }
 }

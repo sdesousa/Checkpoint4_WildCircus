@@ -1,13 +1,12 @@
-{% extends 'base.html.twig' %}
+{% extends 'layout.html.twig' %}
 
-{% block title %}Edit Spectacle{% endblock %}
+{% block title %}Modifier Spectacle{% endblock %}
 
 {% block body %}
-    <h1>Edit Spectacle</h1>
-
-    {{ include('spectacle/_form.html.twig', {'button_label': 'Update'}) }}
-
-    <a href="{{ path('spectacle_index') }}">back to list</a>
-
-    {{ include('spectacle/_delete_form.html.twig') }}
+    <h1>Modifier Spectacle</h1>
+    {{ include('spectacle/_form.html.twig', {'button_label': 'Modifier'}) }}
+    <div class="d-flex justify-content-around">
+        <a class="btn btn-turquoise" href="{{ path('admin_spectacle_index') }}">retourner à la liste des numéros</a>
+        {{ include('spectacle/_delete_form.html.twig') }}
+    </div>
 {% endblock %}

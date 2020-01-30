@@ -9,39 +9,39 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use \DateTime;
 
 /**
- * @Route("/spectacle")
+ * @Route("/admin/spectacle")
  */
 class AdminSpectacleController extends AbstractController
 {
     /**
-     * @Route("/", name="spectacle_index", methods={"GET"})
+     * @Route("/", name="admin_spectacle_index", methods={"GET"})
      */
     public function index(SpectacleRepository $spectacleRepository): Response
     {
-        return $this->render('spectacle/index.html.twig', [
-            'spectacles' => $spectacleRepository->findAll(),
+        return $this->render('spectacle/index_admin.html.twig', [
+            'spectacles' => $spectacleRepository->findBy([], ['date' => 'DESC']),
         ]);
     }
 
     /**
-     * @Route("/new", name="spectacle_new", methods={"GET","POST"})
+     * @Route("/new", name="admin_spectacle_new", methods={"GET","POST"})
      */
     public function new(Request $request): Response
     {
         $spectacle = new Spectacle();
         $form = $this->createForm(SpectacleType::class, $spectacle);
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
+            $spectacle->setUpdatedAt(new DateTime());
             $entityManager->persist($spectacle);
             $entityManager->flush();
-
-            return $this->redirectToRoute('spectacle_index');
+            $this->addFlash('success', 'Votre spectacle a été créé');
+            return $this->redirectToRoute('admin_spectacle_index');
         }
-
         return $this->render('spectacle/new.html.twig', [
             'spectacle' => $spectacle,
             'form' => $form->createView(),
@@ -49,29 +49,30 @@ class AdminSpectacleController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="spectacle_show", methods={"GET"})
+     * @Route("/{id}", name="admin_spectacle_show", methods={"GET"})
      */
     public function show(Spectacle $spectacle): Response
     {
-        return $this->render('spectacle/show.html.twig', [
+        return $this->render('spectacle/show_admin.html.twig', [
             'spectacle' => $spectacle,
         ]);
     }
 
     /**
-     * @Route("/{id}/edit", name="spectacle_edit", methods={"GET","POST"})
+     * @Route("/{id}/edit", name="admin_spectacle_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, Spectacle $spectacle): Response
     {
         $form = $this->createForm(SpectacleType::class, $spectacle);
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
-
-            return $this->redirectToRoute('spectacle_index');
+            $entityManager = $this->getDoctrine()->getManager();
+            $spectacle->setUpdatedAt(new DateTime());
+            $entityManager->persist($spectacle);
+            $entityManager->flush();
+            $this->addFlash('success', 'Votre spectacle a été modifié');
+            return $this->redirectToRoute('admin_spectacle_index');
         }
-
         return $this->render('spectacle/edit.html.twig', [
             'spectacle' => $spectacle,
             'form' => $form->createView(),
@@ -79,7 +80,7 @@ class AdminSpectacleController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="spectacle_delete", methods={"DELETE"})
+     * @Route("/{id}", name="admin_spectacle_delete", methods={"DELETE"})
      */
     public function delete(Request $request, Spectacle $spectacle): Response
     {
@@ -87,8 +88,9 @@ class AdminSpectacleController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($spectacle);
             $entityManager->flush();
+            $this->addFlash('danger', 'Votre spectacle a été supprimé');
         }
 
-        return $this->redirectToRoute('spectacle_index');
+        return $this->redirectToRoute('admin_spectacle_index');
     }
 }
