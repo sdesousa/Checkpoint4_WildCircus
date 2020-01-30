@@ -18,15 +18,6 @@ class Booking
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank(message="Champ obligatoire")
-     * @Assert\Length(
-     *      max = 255,
-     *      maxMessage = "Entrée trop longue, elle doit être au plus {{ limit }} caractères")
-     */
-    private $user;
-
-    /**
      * @ORM\Column(type="integer", nullable=true)
      * @Assert\Positive
      */
@@ -43,21 +34,15 @@ class Booking
      */
     private $spectacle;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="bookings")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $user;
+
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getUser(): ?string
-    {
-        return $this->user;
-    }
-
-    public function setUser(string $user): self
-    {
-        $this->user = $user;
-
-        return $this;
     }
 
     public function getNumberTicket(): ?int
@@ -92,6 +77,18 @@ class Booking
     public function setSpectacle(?Spectacle $spectacle): self
     {
         $this->spectacle = $spectacle;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }
