@@ -17,7 +17,7 @@
             <tbody>
             {% for booking in bookings %}
                 <tr>
-                    <td>{{ booking.user }}</td>
+                    <td><a href="{{ path('admin_booking_show', {'id': booking.id}) }}">{{ booking.user }}</a></td>
                     <td><a href="{{ path('admin_spectacle_show', {'id': booking.spectacle.id}) }}">{{ booking.spectacle.name }}</a></td>
                     <td>{{ booking.numberTicket }}</td>
                     <td>{{ booking.totalPrice }}</td>

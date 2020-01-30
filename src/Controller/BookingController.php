@@ -26,30 +26,7 @@ class BookingController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="booking_new", methods={"GET","POST"})
-     */
-    public function new(Request $request): Response
-    {
-        $booking = new Booking();
-        $form = $this->createForm(BookingType::class, $booking);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($booking);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('booking_index');
-        }
-
-        return $this->render('booking/new.html.twig', [
-            'booking' => $booking,
-            'form' => $form->createView(),
-        ]);
-    }
-
-    /**
-     * @Route("/{id}", name="booking_show", methods={"GET"})
+     * @Route("/{id}", name="admin_booking_show", methods={"GET"})
      */
     public function show(Booking $booking): Response
     {
@@ -59,7 +36,7 @@ class BookingController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="booking_edit", methods={"GET","POST"})
+     * @Route("/{id}/edit", name="admin_booking_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, Booking $booking): Response
     {
@@ -68,8 +45,8 @@ class BookingController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
-
-            return $this->redirectToRoute('booking_index');
+            $this->addFlash('success', 'Votre réservation a été modifiée');
+            return $this->redirectToRoute('admin_booking_index');
         }
 
         return $this->render('booking/edit.html.twig', [
@@ -79,7 +56,7 @@ class BookingController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="booking_delete", methods={"DELETE"})
+     * @Route("/{id}", name="admin_booking_delete", methods={"DELETE"})
      */
     public function delete(Request $request, Booking $booking): Response
     {
@@ -89,6 +66,6 @@ class BookingController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('booking_index');
+        return $this->redirectToRoute('admin_booking_index');
     }
 }

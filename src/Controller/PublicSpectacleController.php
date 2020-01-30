@@ -50,7 +50,7 @@ class PublicSpectacleController extends AbstractController
                 $booking->setTotalPrice($placesKid*$price->getKid()+$placesAdult*$price->getAdult()+$placesSenior*$price->getSenior());
                 $entityManager->persist($booking);
                 $entityManager->flush();
-                $this->addFlash('success', 'Votre réservation a été enregistré');
+                $this->addFlash('success', 'Votre réservation a été enregistrée');
                 return $this->redirectToRoute('home');
             } else {
                 $this->addFlash('danger', 'Pas assez de places disponible');

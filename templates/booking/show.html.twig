@@ -1,34 +1,34 @@
-{% extends 'base.html.twig' %}
+{% extends 'layout.html.twig' %}
 
-{% block title %}Booking{% endblock %}
+{% block title %}{{ booking.user }}{% endblock %}
 
 {% block body %}
-    <h1>Booking</h1>
-
-    <table class="table">
-        <tbody>
+    <div class="container">
+        <h1 class="text-center m-5">{{ booking.user }}</h1>
+        <table class="table w-100">
+            <tbody>
             <tr>
-                <th>Id</th>
-                <td>{{ booking.id }}</td>
-            </tr>
-            <tr>
-                <th>User</th>
+                <th>Personne</th>
                 <td>{{ booking.user }}</td>
             </tr>
             <tr>
-                <th>NumberTicket</th>
+                <th>Spectacle</th>
+                <td><a href="{{ path('admin_spectacle_show', {'id': booking.spectacle.id}) }}">{{ booking.spectacle.name }}</a></td>
+            </tr>
+            <tr>
+                <th>Tickets</th>
                 <td>{{ booking.numberTicket }}</td>
             </tr>
             <tr>
-                <th>TotalPrice</th>
+                <th>Prix total</th>
                 <td>{{ booking.totalPrice }}</td>
             </tr>
-        </tbody>
-    </table>
-
-    <a href="{{ path('booking_index') }}">back to list</a>
-
-    <a href="{{ path('booking_edit', {'id': booking.id}) }}">edit</a>
-
-    {{ include('booking/_delete_form.html.twig') }}
+            </tbody>
+        </table>
+        <div class="d-flex justify-content-around">
+            <a class="btn btn-turquoise" href="{{ path('admin_booking_index') }}">Retour</a>
+            <a class="btn btn-turquoise" href="{{ path('admin_booking_edit', {'id': booking.id}) }}">Modifier</a>
+            {{ include('booking/_delete_form.html.twig') }}
+        </div>
+    </div>
 {% endblock %}

@@ -1,13 +1,12 @@
-{% extends 'base.html.twig' %}
+{% extends 'layout.html.twig' %}
 
-{% block title %}Edit Booking{% endblock %}
+{% block title %}Modifier réservation{% endblock %}
 
 {% block body %}
-    <h1>Edit Booking</h1>
-
-    {{ include('booking/_form.html.twig', {'button_label': 'Update'}) }}
-
-    <a href="{{ path('booking_index') }}">back to list</a>
-
-    {{ include('booking/_delete_form.html.twig') }}
+    <h1>Modifier réservation</h1>
+    {{ include('booking/_form.html.twig', {'button_label': 'Modifier'}) }}
+    <div class="d-flex justify-content-around">
+        <a class="btn btn-turquoise" href="{{ path('admin_booking_index') }}">retourner à la liste des réservations</a>
+        {{ include('booking/_delete_form.html.twig') }}
+    </div>
 {% endblock %}
