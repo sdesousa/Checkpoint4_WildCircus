@@ -1,6 +1,6 @@
 {% form_theme form 'bootstrap_4_horizontal_layout.html.twig' %}
-<div class=" formDiv d-flex justify-content-center">
-    {{ form_start(form) }}
+<div class="formDiv row">
+    {{ form_start(form, {'attr': {'class': 'col-12 col-lg-8 offset-0 offset-lg-2'}}) }}
     <h2 class="formTitle">Réservez vos places : </h2>
     {{ form_widget(form) }}
     <div class="d-flex justify-content-center">
