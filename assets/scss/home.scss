@@ -14,16 +14,25 @@
   width: 40%;
 }
 
-.btn.btnReservation:hover {
-  color: $third-color;
-  box-shadow: 0 0 2px 2px $secondary-color;
-
-}
-
 .textIndent {
   text-indent: 1.2rem;
 }
 
 .nextShow {
   border: 2px solid $primary-color;
+  background-color: $white;
 }
+
+.divTarif {
+  border: 2px dotted $primary-color;
+  background-color: $white;
+}
+
+.tarif {
+  list-style: none;
+  li::before {
+    content: "• ";
+    color: $primary-color;
+  }
+}
+

@@ -8,3 +8,6 @@ nav {
   filter: invert(1);
 }
 
+.navbar-nav .nav-item a.nav-link {
+  color: $primary-color;
+}

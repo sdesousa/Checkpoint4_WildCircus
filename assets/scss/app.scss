@@ -1,7 +1,7 @@
 $primary-color: #1abc9c;
 $secondary-color: #0a2342;
 $third-color: #f0f0f0;
-$fourth-color: #FFEE5E;
+$white: #ffffff;
 $font-body: 'Lato', sans-serif;
 $font-title: 'Quicksand', sans-serif;
 $font-size-title: 3rem;
@@ -25,10 +25,6 @@ $font-size-body: 1.2rem;
   font-size: $font-size-body;
 }
 
-a {
-  text-decoration: none;
-  color: $primary-color;
-}
 
 h1 {
   font-size: $font-size-title;
@@ -38,6 +34,13 @@ h1 {
   text-align: center;
 }
 
+h2 {
+  font-family: $font-title;
+  color: $primary-color;
+  font-weight: bold;
+  font-size: 2rem;
+}
+
 .primary-color {
   color: $primary-color;
 }
@@ -45,7 +48,13 @@ h1 {
 .btn-turquoise {
   background-color: $primary-color;
   color: $secondary-color;
+
+  &:hover {
+    color: $third-color;
+    box-shadow: 0 0 2px 2px $secondary-color;
+  }
 }
+
 
 main {
   background-color: $third-color;

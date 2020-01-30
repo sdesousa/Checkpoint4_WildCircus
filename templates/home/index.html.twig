@@ -8,25 +8,34 @@
 
     <div class="container-fluid">
         <section class="row my-4">
-            <div class="col-lg-6 p-5 d-flex flex-column">
-                <h2 class="text-center primary-color">Notre prochain spectacle : </h2>
-                <h2 class="text-center primary-color">{{ nextSpectacle.name }}</h2>
-                <div class="m-4 p-4">
-                    <p><i class="fas fa-map-marker-alt primary-color mr-3"></i>{{ nextSpectacle.place }}</p>
-                    <p>Date :
-                        {{ nextSpectacle.date|format_datetime('long', 'none', locale='fr') }} à
-                        {{ nextSpectacle.date|format_datetime('none', 'short', locale='fr') }}
-                    </p>
-                    <p>Places disponibles : {{ nextSpectacle.capacity }}</p>
-                    <ul> Tarif :
-                        <li class="ml-5"> Enfants : {{ price.kid }}</li>
-                        <li class="ml-5"> Adulte : {{ price.adult }}</li>
-                        <li class="ml-5"> Sénior : {{ price.senior }}</li>
-                    </ul>
+            <div class="col-lg-7 py-3 pl-3 py-lg-5 pl-lg-5 pr-3 d-flex flex-column order-1 order-lg-0">
+                <h2 class="text-center">Notre prochain spectacle : </h2>
+                <h2 class="text-center">{{ nextSpectacle.name }}</h2>
+                <div class="m-2 p-2 row">
+                    <div class="divTarif col-lg-8 py-3 mb-4 mb-lg-0">
+                        <p><i class="fas fa-map-marker-alt primary-color mr-3"></i>{{ nextSpectacle.place }}</p>
+                        <p><i class="far fa-calendar-alt primary-color mr-3"></i>
+                            {{ nextSpectacle.date|format_datetime('long', 'none', locale='fr') }}
+                        </p>
+                        <p><i class="far fa-clock primary-color mr-3"></i>
+                            {{ nextSpectacle.date|format_datetime('none', 'short', locale='fr') }}
+                        </p>
+                        <p><i class="fas fa-ticket-alt primary-color mr-3"></i>
+                            Encore {{ availableSeat }} places disponible
+                        </p>
+                    </div>
+                    <div class="col-lg-3 offset-lg-1 divTarif py-3 d-flex flex-column">
+                        <i class="fas fa-euro-sign primary-color align-self-center mb-4"></i>
+                        <ul class="tarif">
+                            <li> Enfants : {{ price.kid }}</li>
+                            <li> Adulte : {{ price.adult }}</li>
+                            <li> Sénior : {{ price.senior }}</li>
+                        </ul>
+                    </div>
                 </div>
                 <a class="btn btn-turquoise align-self-center btnReservation" href="{{ path('spectacle_show', {'id': nextSpectacle.id}) }}">Réserver</a>
             </div>
-            <div class="col-lg-6 p-5">
+            <div class="col-lg-5  py-3 pr-3 py-lg-5 pr-lg- 5 pl-3 order-0 order-lg-1">
                 <img class="imgSectionHome"
                      src="
                         {% if nextSpectacle.poster is null %}
@@ -39,7 +48,7 @@
         </section>
 
         <section class="row my-4">
-            <div class="col-lg-6 p-5">
+            <div class="col-lg-5  py-3 pl-3 py-lg-5 pl-lg-5 pr-3">
                 <img class="imgSectionHome"
                      src="
                         {% if lastAct.picture is null %}
@@ -49,18 +58,18 @@
                         {% endif %}"
                      alt="{{ lastAct.name }}">
             </div>
-            <div class="col-lg-6 p-5  d-flex flex-column">
-                <h2 class="text-center primary-color">Notre nouveau numéro : </h2>
-                <h2 class="text-center primary-color">{{ lastAct.name }}</h2>
-                <div class="m-4 p-4">
+            <div class="col-lg-7 py-3 pl-3 py-lg-5 pr-lg-5 pr-3 d-flex flex-column">
+                <h2 class="text-center">Notre nouveau numéro : </h2>
+                <h2 class="text-center">{{ lastAct.name }}</h2>
+                <div class="m-2 p-2">
                     <p class="textIndent">{{ lastAct.description }}</p>
-                    <p>Prochainement visible lors du show : </p>
-                    <div class="m-3 p-3 nextShow">
+                    <p><em>Prochainement visible lors du show : </em></p>
+                    <div class="m-4 p-4 nextShow d-flex flex-column">
                         <p>{{ nextSpectacleWithAct.name }}</p>
                         <p>Le {{ nextSpectacleWithAct.date|format_datetime('short', 'none', locale='fr') }}</p>
+                        <a class="btn btn-turquoise align-self-center btnReservation" href="{{ path('spectacle_show', {'id': nextSpectacleWithAct.id}) }}">Plus d'infos</a>
                     </div>
                 </div>
-                <a class="btn btn-turquoise align-self-center btnReservation" href="#">Plus d'infos</a>
             </div>
         </section>
     </div>
