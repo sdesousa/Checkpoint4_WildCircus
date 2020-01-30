@@ -7,6 +7,7 @@ use App\Entity\Spectacle;
 use App\Form\BookingType;
 use App\Repository\SpectacleRepository;
 use App\Repository\PriceRepository;
+use App\Services\SeatAvailability;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -30,9 +31,10 @@ class PublicSpectacleController extends AbstractController
     /**
      * @Route("/{id}", name="spectacle_show", methods={"GET","POST"})
      */
-    public function show(Request $request, Spectacle $spectacle, PriceRepository $priceRepository): Response
+    public function show(Request $request, Spectacle $spectacle, PriceRepository $priceRepository, SeatAvailability $seatAvailability): Response
     {
         $price = $priceRepository->findOneBy([]);
+        $availableSeat = $seatAvailability->availableSeats($spectacle);
         $booking = new Booking();
         $form = $this->createForm(BookingType::class, $booking);
         $form->handleRequest($request);
@@ -41,17 +43,24 @@ class PublicSpectacleController extends AbstractController
             $placesKid = $request->request->get('booking')['placesKid'];
             $placesAdult = $request->request->get('booking')['placesAdult'];
             $placesSenior = $request->request->get('booking')['placesSenior'];
-            $booking->setSpectacle($spectacle);
-            $booking->setNumberTicket($placesKid+$placesAdult+$placesSenior);
-            $booking->setTotalPrice($placesKid*$price->getKid()+$placesAdult*$price->getAdult()+$placesSenior*$price->getSenior());
-            $entityManager->persist($booking);
-            $entityManager->flush();
-            $this->addFlash('success', 'Votre réservation a été enregistré');
-            return $this->redirectToRoute('home');
+            $seats = $placesKid + $placesAdult + $placesSenior;
+            if ($seats <= $availableSeat) {
+                $booking->setSpectacle($spectacle);
+                $booking->setNumberTicket($seats);
+                $booking->setTotalPrice($placesKid*$price->getKid()+$placesAdult*$price->getAdult()+$placesSenior*$price->getSenior());
+                $entityManager->persist($booking);
+                $entityManager->flush();
+                $this->addFlash('success', 'Votre réservation a été enregistré');
+                return $this->redirectToRoute('home');
+            } else {
+                $this->addFlash('danger', 'Pas assez de places disponible');
+                return $this->redirectToRoute('spectacle_show', ['id' => $spectacle->getId()]);
+            }
         }
 
         return $this->render('spectacle/show.html.twig', [
             'spectacle' => $spectacle,
+            'availableSeat' => $availableSeat,
             'price' => $price,
             'form' => $form->createView()
         ]);
