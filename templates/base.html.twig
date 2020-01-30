@@ -13,6 +13,9 @@
         {% endblock %}
     </head>
     <body>
+        {% block header %}
+            {% include '_navbar.html.twig' %}
+        {% endblock %}
         {% for label, messages in app.flashes %}
             {% for message in messages %}
                 <div class="alert alert-{{ label }} msgFlash" role="alert">
@@ -23,6 +26,7 @@
                 </div>
             {% endfor %}
         {% endfor %}
+
         {% block layout %}{% endblock %}
         {% block javascripts %}
             {{ encore_entry_script_tags('app') }}

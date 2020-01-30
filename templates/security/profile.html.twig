@@ -1,0 +1,35 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Mes réservations{% endblock %}
+
+{% block body %}
+    <div class="container-fluid">
+        <h1 class="text-center m-5">Mes réservations</h1>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Personne</th>
+                <th>Spectacle</th>
+                <th>Tickets</th>
+                <th>Prix total</th>
+                <th>Supprimer</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for booking in user.getBookings %}
+                <tr>
+                    <td>{{ booking.user.email }}</a></td>
+                    <td>{{ booking.spectacle.name }}</a></td>
+                    <td>{{ booking.numberTicket }}</td>
+                    <td>{{ booking.totalPrice }}</td>
+                    <td>{{ include('security/_delete_form.html.twig') }}</td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="5">Aucun article trouvé</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

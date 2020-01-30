@@ -49,13 +49,15 @@ class PublicSpectacleController extends AbstractController
             $placesAdult = $request->request->get('booking')['placesAdult'];
             $placesSenior = $request->request->get('booking')['placesSenior'];
             $seats = $placesKid + $placesAdult + $placesSenior;
+            $totalPrice = $placesKid*$price->getKid()+$placesAdult*$price->getAdult()+$placesSenior*$price->getSenior();
             if ($seats <= $availableSeat) {
+                $booking->setUser($this->getUser());
                 $booking->setSpectacle($spectacle);
                 $booking->setNumberTicket($seats);
-                $booking->setTotalPrice($placesKid*$price->getKid()+$placesAdult*$price->getAdult()+$placesSenior*$price->getSenior());
+                $booking->setTotalPrice($totalPrice);
                 $entityManager->persist($booking);
                 $entityManager->flush();
-                $this->addFlash('success', 'Votre réservation a été enregistrée');
+                $this->addFlash('success', 'Votre réservation a été enregistrée. Vous avez réservé '.$seats.' places pour '.$totalPrice.' euros.');
                 return $this->redirectToRoute('home');
             } else {
                 $this->addFlash('danger', 'Pas assez de places disponible');

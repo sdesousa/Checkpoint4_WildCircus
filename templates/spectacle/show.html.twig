@@ -42,7 +42,9 @@
                 </div>
             </div>
         </section>
-        {{ include('booking/_form.html.twig') }}
+        {% if app.user %}
+            {{ include('booking/_form.html.twig') }}
+        {% endif %}
 
     </div>
 {% endblock %}

@@ -15,9 +15,6 @@ class BookingType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('user', TextType::class, [
-                'label' => 'Nom',
-            ])
             ->add('placesKid', IntegerType::class,[
                 'label' => 'Places enfants',
                 'mapped' => false,
