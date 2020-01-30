@@ -24,7 +24,7 @@
                         <li class="ml-5"> Sénior : {{ price.senior }}</li>
                     </ul>
                 </div>
-                <a class="btn btn-turquoise align-self-center btnReservation" href="#">Réserver</a>
+                <a class="btn btn-turquoise align-self-center btnReservation" href="{{ path('spectacle_show', {'id': nextSpectacle.id}) }}">Réserver</a>
             </div>
             <div class="col-lg-6 p-5">
                 <img class="imgSectionHome"

@@ -27,8 +27,7 @@ class Booking
     private $user;
 
     /**
-     * @ORM\Column(type="integer")
-     * @Assert\NotBlank
+     * @ORM\Column(type="integer", nullable=true)
      * @Assert\Positive
      */
     private $numberTicket;
@@ -66,7 +65,7 @@ class Booking
         return $this->numberTicket;
     }
 
-    public function setNumberTicket(int $numberTicket): self
+    public function setNumberTicket(?int $numberTicket): self
     {
         $this->numberTicket = $numberTicket;
 
