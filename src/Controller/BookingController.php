@@ -11,12 +11,12 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/booking")
+ * @Route("/admin/booking")
  */
 class BookingController extends AbstractController
 {
     /**
-     * @Route("/", name="booking_index", methods={"GET"})
+     * @Route("/", name="admin_booking_index", methods={"GET"})
      */
     public function index(BookingRepository $bookingRepository): Response
     {

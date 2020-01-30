@@ -1,39 +1,33 @@
-{% extends 'base.html.twig' %}
+{% extends 'layout.html.twig' %}
 
-{% block title %}Booking index{% endblock %}
+{% block title %}Les réservations{% endblock %}
 
 {% block body %}
-    <h1>Booking index</h1>
-
-    <table class="table">
-        <thead>
+    <div class="container-fluid">
+        <h1 class="text-center m-5">Les réservations</h1>
+        <table class="table">
+            <thead>
             <tr>
-                <th>Id</th>
-                <th>User</th>
-                <th>NumberTicket</th>
-                <th>TotalPrice</th>
-                <th>actions</th>
+                <th>Personne</th>
+                <th>Spectacle</th>
+                <th>Tickets</th>
+                <th>Prix total</th>
             </tr>
-        </thead>
-        <tbody>
-        {% for booking in bookings %}
-            <tr>
-                <td>{{ booking.id }}</td>
-                <td>{{ booking.user }}</td>
-                <td>{{ booking.numberTicket }}</td>
-                <td>{{ booking.totalPrice }}</td>
-                <td>
-                    <a href="{{ path('booking_show', {'id': booking.id}) }}">show</a>
-                    <a href="{{ path('booking_edit', {'id': booking.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="5">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <a href="{{ path('booking_new') }}">Create new</a>
+            </thead>
+            <tbody>
+            {% for booking in bookings %}
+                <tr>
+                    <td>{{ booking.user }}</td>
+                    <td><a href="{{ path('admin_spectacle_show', {'id': booking.spectacle.id}) }}">{{ booking.spectacle.name }}</a></td>
+                    <td>{{ booking.numberTicket }}</td>
+                    <td>{{ booking.totalPrice }}</td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="5">Aucun article trouvé</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
 {% endblock %}
