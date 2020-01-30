@@ -6,13 +6,13 @@
     <h1 class="mb-4">Wild circus</h1>
     <img class="imgHome" src="{{ asset('build/circus-home.webp') }}" alt="Wild circus">
 
-    <div class="container-fluid mt-5">
+    <div class="container-fluid">
         <section class="row my-4">
             <div class="col-lg-6 p-5 d-flex flex-column">
                 <h2 class="text-center primary-color">Notre prochain spectacle : </h2>
                 <h2 class="text-center primary-color">{{ nextSpectacle.name }}</h2>
                 <div class="m-4 p-4">
-                    <p>Lieu : {{ nextSpectacle.place }}</p>
+                    <p><i class="fas fa-map-marker-alt primary-color mr-3"></i>{{ nextSpectacle.place }}</p>
                     <p>Date :
                         {{ nextSpectacle.date|format_datetime('long', 'none', locale='fr') }} à
                         {{ nextSpectacle.date|format_datetime('none', 'short', locale='fr') }}

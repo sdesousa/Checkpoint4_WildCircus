@@ -7,10 +7,13 @@ $font-title: 'Quicksand', sans-serif;
 $font-size-title: 3rem;
 $font-size-body: 1.2rem;
 
-
 @import "navbar";
 @import "home";
 @import "~bootstrap/scss/bootstrap";
+@import '~@fortawesome/fontawesome-free/scss/fontawesome';
+@import '~@fortawesome/fontawesome-free/scss/regular';
+@import '~@fortawesome/fontawesome-free/scss/solid';
+@import '~@fortawesome/fontawesome-free/scss/brands';
 
 
 * {
@@ -42,4 +45,9 @@ h1 {
 .btn-turquoise {
   background-color: $primary-color;
   color: $secondary-color;
+}
+
+main {
+  background-color: $third-color;
+  margin-top: 92px;
 }
