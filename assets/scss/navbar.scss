@@ -1,0 +1,13 @@
+nav {
+  background-color: $secondary-color;
+  border-bottom: 2px solid $primary-color;
+}
+
+.imgLogo {
+  height: 60px;
+  filter: invert(1);
+}
+
+.navbar-nav .nav-item a.nav-link {
+  color: $primary-color;
+}

@@ -1,0 +1,67 @@
+.imgHome {
+  width: 100%;
+  height: calc(100vh - 180px);
+  object-fit: fill;
+}
+
+.imgSectionHome {
+  width: 100%;
+  height: 60vh;
+  object-fit: contain;
+}
+
+.btn.btnReservation {
+  width: 40%;
+}
+
+.textIndent {
+  text-indent: 1.2rem;
+}
+
+.nextShow {
+  border: 2px dotted $primary-color;
+  background-color: $white;
+}
+
+.divTarif {
+  border: 2px dotted $primary-color;
+  background-color: $white;
+}
+
+.tarif {
+  list-style: none;
+  li::before {
+    content: "• ";
+    color: $primary-color;
+  }
+}
+
+.imgAct {
+  width: 100%;
+  height: 40vh;
+  object-fit: contain;
+}
+
+.spectacleDate {
+  font-size: 2.5rem;
+  color: $secondary-color;
+  font-style: italic;
+  margin-left: 8rem;
+}
+
+.formDiv form {
+  width: 60vw;
+  align-self: center;
+  padding: 2rem;
+  border: 2px solid $primary-color;
+  border-radius: 1rem;
+  margin-bottom: 4rem;
+}
+
+.formTitle {
+  font-size: 2.5rem;
+  color: $secondary-color;
+  font-style: italic;
+  text-align: center;
+  margin-bottom: 1.6rem;
+}

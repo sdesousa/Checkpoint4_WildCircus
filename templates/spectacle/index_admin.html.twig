@@ -1,0 +1,38 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Admin spectacle{% endblock %}
+
+{% block body %}
+    <div class="container-fluid">
+        <h1 class="text-center m-5">Les spectacles</h1>
+
+        <a href="{{ path('admin_spectacle_new') }}" class="btn btn-turquoise">
+            Créer un spectacle
+        </a>
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Lieu</th>
+                <th>Date</th>
+                <th>Capacité</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for spectacle in spectacles %}
+                <tr>
+                    <td><a href="{{ path('admin_spectacle_show', {'id': spectacle.id}) }}">{{ spectacle.name }}</a></td>
+                    <td>{{ spectacle.place }}</td>
+                    <td>{{ spectacle.date|format_datetime('short', 'short', locale='fr')}}</td>
+                    <td>{{ spectacle.capacity }}</td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="5">Aucun article trouvé</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

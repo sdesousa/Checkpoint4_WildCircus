@@ -1,0 +1,28 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Nos numéros{% endblock %}
+
+{% block body %}
+    <h1 class="mb-5">Nos numéros</h1>
+    {% for act in acts %}
+        <section class="row my-4 w-100">
+            <div class="col-lg-5 p-3 {% if loop.index is even %} order-lg-1 {% endif %}">
+                <img class="imgAct"
+                     src="
+                        {% if act.picture is null %}
+                        {{ asset('build/circus-act.webp') }}
+                        {% else %}
+                        {{ vich_uploader_asset(act, 'pictureFile') }}
+                        {% endif %}"
+                     alt="{{ act.name }}">
+            </div>
+            <div class="col-lg-7 p-3 d-flex flex-column {% if loop.index is even %} order-lg-0 {% endif %}">
+                <h2 class="text-center">{{ act.name }}</h2>
+                <div class="m-2 p-2">
+                    <p class="textIndent">{{ act.description }}</p>
+                    <p><em>Première représentation le {{ act.created|format_date('short', locale='fr') }}</em></p>
+                </div>
+            </div>
+        </section>
+    {% endfor %}
+{% endblock %}
