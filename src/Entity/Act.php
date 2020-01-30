@@ -53,7 +53,7 @@ class Act
      * @Vich\UploadableField(mapping="act_picture", fileNameProperty="picture")
      * @var File|null
      * @Assert\File(
-     *     maxSize = "200k",
+     *     maxSize = "300k",
      *     maxSizeMessage="La taille des images est limité à {{ limit }} {{ suffix }}",
      *     mimeTypes = {"image/jpeg", "image/png", "image/webp", "image/gif"},
      *     mimeTypesMessage = "Ce n'est pas un format d'image valide"
