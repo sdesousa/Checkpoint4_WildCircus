@@ -25,6 +25,7 @@ class SpectacleFixtures extends Fixture implements DependentFixtureInterface
             foreach ($acts as $act) {
                 $spectacle->addAct($this->getReference('act_' . $act));
             }
+            $this->addReference('spectacle_'.$i, $spectacle);
             $manager->persist($spectacle);
         }
         $manager->flush();
