@@ -52,9 +52,7 @@
                 <img class="imgSectionHome"
                      src="
                         {% if lastAct.picture is null %}
-                        {{ asset('build/circus-act.webp') }}  'min' => 0,
-        'max' => 10,
-    ],
+                        {{ asset('build/circus-act.webp') }}
                         {% else %}
                         {{ vich_uploader_asset(lastAct, 'pictureFile') }}
                         {% endif %}"

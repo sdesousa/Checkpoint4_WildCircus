@@ -44,7 +44,7 @@ class SecurityController extends AbstractController
     }
 
     /**
-     * @Route("/profil", name="app_profile")
+     * @Route("/profile", name="app_profile")
      * @IsGranted("ROLE_USER")
      */
     public function profile() :Response
@@ -56,7 +56,7 @@ class SecurityController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="profile_booking_delete", methods={"DELETE"})
+     * @Route("/profile/{id}", name="profile_booking_delete", methods={"DELETE"})
      */
     public function delete(Request $request, Booking $booking): Response
     {
