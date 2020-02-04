@@ -1,10 +1,11 @@
 {% form_theme form 'bootstrap_4_horizontal_layout.html.twig' %}
-<div class="formDiv row">
+<div class="formDiv row" id="vue-price">
     {{ form_start(form, {'attr': {'class': 'col-12 col-lg-8 offset-0 offset-lg-2'}}) }}
     <h2 class="formTitle">Réservez vos places : </h2>
     {{ form_widget(form) }}
     <div class="d-flex justify-content-center">
         <button class="btn btn-turquoise">{{ button_label|default('Valider') }}</button>
     </div>
+    { message }
     {{ form_end(form) }}
 </div>
