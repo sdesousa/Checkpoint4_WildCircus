@@ -71,4 +71,13 @@ class Price
 
         return $this;
     }
+
+    public function toArray()
+    {
+        return [
+            'kid' => $this->kid,
+            'adult' => $this->adult,
+            'senior' => $this->senior,
+        ];
+    }
 }

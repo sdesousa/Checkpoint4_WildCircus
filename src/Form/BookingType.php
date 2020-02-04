@@ -21,6 +21,7 @@ class BookingType extends AbstractType
                 'attr' => [
                     'min' => 0,
                     'max' => 10,
+                    'v-model.number' => 'plk'
                 ],
             ])
             ->add('placesAdult', IntegerType::class,[
@@ -29,6 +30,8 @@ class BookingType extends AbstractType
                 'attr' => [
                     'min' => 0,
                     'max' => 10,
+                    'v-model.number' => 'pla'
+
                 ],
             ])
             ->add('placesSenior', IntegerType::class,[
@@ -37,6 +40,8 @@ class BookingType extends AbstractType
                 'attr' => [
                     'min' => 0,
                     'max' => 10,
+                    'v-model.number' => 'pls'
+
                 ],
             ])
         ;
