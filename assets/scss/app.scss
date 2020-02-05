@@ -57,9 +57,13 @@ h2 {
 
 main {
   background-color: $third-color;
-  //margin-top: 92px;
+  margin-top: 92px;
 }
 
 .custom-file-label:lang(fr)::after {
   content: 'Parcourir';
+}
+
+.msgFlash {
+  margin-top: 92px;
 }
